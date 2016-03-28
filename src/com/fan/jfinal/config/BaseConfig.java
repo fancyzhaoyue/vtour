@@ -2,6 +2,7 @@ package com.fan.jfinal.config;
 
 import com.fan.jfinal.controller.IndexController;
 import com.fan.jfinal.controller.PublishController;
+import com.fan.jfinal.controller.TourController;
 import com.fan.jfinal.controller.UserController;
 import com.fan.jfinal.interceptor.CommonInterceptor;
 import com.fan.jfinal.model.User;
@@ -20,19 +21,20 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 public class BaseConfig extends JFinalConfig {
 
 	public void configConstant(Constants me) {
-		PropKit.use("sysConfig.properties");
-		me.setDevMode(PropKit.getBoolean("devMode"));
+		PropKit.use("sysconfigtest.properties");
+		me.setDevMode(PropKit.getBoolean("devmode"));
 		me.setBaseViewPath("/page");
 	}
 
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class);
 		me.add("/u", UserController.class);
+		me.add("/vt", TourController.class);
 		me.add("/publish", PublishController.class);
 	}
 
 	public void configPlugin(Plugins me) {
-		C3p0Plugin c3p0Plugin = new C3p0Plugin(PropKit.get("jdbcUrl"), PropKit.get("jdbcUser"), PropKit.get("jdbcPassword")); 
+		C3p0Plugin c3p0Plugin = new C3p0Plugin(PropKit.get("database.url"), PropKit.get("database.user"), PropKit.get("database.password")); 
 		me.add(c3p0Plugin);
 		
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin); 

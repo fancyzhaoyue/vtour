@@ -13,7 +13,15 @@ public class PublishController extends BaseController {
 	public void create() {
 		UploadFile panoFile = getFile();
 		
-		System.out.println(panoFile);
+		System.out.println(panoFile.getContentType());
+		
+		System.out.println(panoFile.getFileName());
+		
+		System.out.println(panoFile.getOriginalFileName());
+		
+		System.out.println(panoFile.getParameterName());
+		
+		System.out.println(panoFile.getUploadPath());
 		
 		render("publishSuccess.html");
 	}
