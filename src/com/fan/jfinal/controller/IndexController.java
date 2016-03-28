@@ -1,9 +1,6 @@
 package com.fan.jfinal.controller;
 
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-
 import com.fan.jfinal.base.BaseController;
 import com.fan.jfinal.model.User;
 import com.fan.jfinal.validator.LoginValidator;
@@ -12,14 +9,7 @@ import com.jfinal.aop.Before;
 
 public class IndexController extends BaseController {
 	
-	public void index() {
-		String cmd = "D:/home/krpano-1.19-pr3/krpanotools32.exe makepano -config=D:/home/krpano-1.19-pr3/templates/vtour-multires.config D:/home/20091210.jpg";
-		try {
-			Process process = Runtime.getRuntime().exec(cmd);
-			System.out.println("process:"+ process.toString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void index() {		
 		render("index.html");
 	}
 	
