@@ -16,10 +16,6 @@ public class PublishController extends BaseController {
 		render("publish.html");
 	}
 	
-	public void add(){
-		
-	}
-	
 	public void create() {
 		
 		User user = (User)getSessionAttr(Constants.SESSION_USER);
@@ -41,6 +37,11 @@ public class PublishController extends BaseController {
 		panoFile.getFile().renameTo(dest);
 		KrpanoUtil.makepano(dest.getAbsolutePath());
 		
+		redirect("/publish/add");
+		
+	}
+	
+	public void add() {
 		render("publishSuccess.html");
 	}
 	

@@ -22,7 +22,7 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 public class BaseConfig extends JFinalConfig {
 
 	public void configConstant(Constants me) {
-		PropKit.use("sysconfigtest.properties");
+		PropKit.use("sysconfig.properties");
 		me.setDevMode(PropKit.getBoolean("devmode"));
 		me.setBaseViewPath("/page");
 	}

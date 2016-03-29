@@ -70,8 +70,11 @@ public class IndexController extends BaseController {
 		user.set("password", ShaUtil.encode("SHA", getPara("password")));
 		user.save();
 		
-		user.remove("password");
+		// 根据id生成uid
+		user.set("uid", user.get("id"));
+		user.update();
 		
+		user.remove("password");
 		setSessionAttr(Constants.SESSION_USER, user);
 		setAttr("data", user);
 		renderMsg();

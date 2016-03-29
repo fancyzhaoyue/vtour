@@ -1,3 +1,6 @@
+.content{
+	min-height:400px;
+}
 .footer {
     color: #777;
     padding: 30px 0;

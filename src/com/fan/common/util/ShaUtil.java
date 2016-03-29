@@ -32,7 +32,7 @@ public class ShaUtil {
 		}
 	}
 
-	private static String getFormattedText(byte[] bytes) {
+	public static String getFormattedText(byte[] bytes) {
 		int len = bytes.length;
 		StringBuilder buf = new StringBuilder(len * 2);
 		for (int j = 0; j < len; j++) {
@@ -41,6 +41,7 @@ public class ShaUtil {
 		}
 		return buf.toString();
 	}
+	
 
 	public static void main(String[] args) {
 		String pwdSHA = encode("SHA", "123123");
