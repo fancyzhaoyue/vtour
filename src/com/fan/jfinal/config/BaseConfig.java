@@ -5,6 +5,7 @@ import com.fan.jfinal.controller.PublishController;
 import com.fan.jfinal.controller.TourController;
 import com.fan.jfinal.controller.UserController;
 import com.fan.jfinal.interceptor.CommonInterceptor;
+import com.fan.jfinal.model.Pano;
 import com.fan.jfinal.model.User;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -41,6 +42,7 @@ public class BaseConfig extends JFinalConfig {
 		me.add(arp);
 		
 		arp.addMapping("user", User.class);
+		arp.addMapping("pano", Pano.class);
 	}
 
 	public void configInterceptor(Interceptors me) {

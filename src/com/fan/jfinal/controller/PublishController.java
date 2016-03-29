@@ -1,8 +1,11 @@
 package com.fan.jfinal.controller;
 
 
+import java.io.File;
+
 import com.fan.common.Constants;
 import com.fan.jfinal.base.BaseController;
+import com.fan.jfinal.model.Pano;
 import com.fan.jfinal.model.User;
 import com.fan.util.KrpanoUtil;
 import com.jfinal.upload.UploadFile;
@@ -18,20 +21,30 @@ public class PublishController extends BaseController {
 	}
 	
 	public void create() {
-		// 1将上传的文件存放到指定位置(与用户关联) /uid/pid/imgs/
-		// 2操作数据库生成pano记录
-		// 3调用makepano命令生成vtour(将处理后的图片拷贝到指定目录 /uid/pid/imgs/) 确认makepano命令如何定义输出文件的位置
-		
-		UploadFile panoFile = getFile();
-		
 		
 		User user = (User)getSessionAttr(Constants.SESSION_USER);
 		String uid = user.getStr("uid");
 		
+		//将上传文件保存在用户独立目录下
+		UploadFile panoFile = getFile("panoFile", uid);
 		
-		KrpanoUtil.makepano(panoFile.getFile().getAbsolutePath());
+		//新增全景图记录
+		Pano pano = getModel(Pano.class);
+		pano.set("name", getPara("name"));
+		pano.set("uid", user.get("id"));
+		pano.save();
+		
+		//文件重命名并通过调用cmd处理全景图
+		String path = panoFile.getUploadPath();
+		String filename = pano.get("id") + getFileExt(panoFile.getFileName());
+		File dest = new File(path, filename); 
+		panoFile.getFile().renameTo(dest);
+		KrpanoUtil.makepano(dest.getAbsolutePath());
 		
 		render("publishSuccess.html");
 	}
 	
+	public String getFileExt(String fileName) {
+        return fileName.substring(fileName.lastIndexOf('.'), fileName.length());
+    }
 }

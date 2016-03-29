@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>${pano.name}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="${webDescription}">
+<meta name="keywords" content="${webKeywords}">
+<meta name="renderer" content="webkit" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="apple-touch-icon" href="" sizes="152x152">
+<link rel="apple-touch-icon" href="" sizes="120x120">
+<link rel="apple-touch-icon" href="" sizes="76x76">
+<link rel="apple-touch-icon" href="" sizes="60x60">
+<link rel="shortcut icon" href="" type="image/x-icon">
+<base href="${CONTEXT_PATH}/">
+<style>
+	@-ms-viewport { width:device-width; }
+	@media only screen and (min-device-width:800px) { html { overflow:hidden; } }
+	html { height:100%; }
+	body { height:100%; overflow:hidden; margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#FFFFFF; background-color:#000000; }
+</style>
+</head>
+<body>
+<div id="pano" style="width:100%;height:100%;"></div>
+<script type="text/javascript" src="static/vendor/krpano/krpano-1.19-pr3.js"></script>
+<script>
+	embedpano({
+		swf: "static/vendor/krpano/krpano.swf",
+		xml: "upload/${pano.uid}/${pano.id}/tour.xml",
+		target: "pano",
+		wmode: "Opaque",
+		html5: "prefer"
+	});
+</script>
+</body>
+</html>
