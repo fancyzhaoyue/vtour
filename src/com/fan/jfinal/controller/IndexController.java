@@ -3,6 +3,8 @@ package com.fan.jfinal.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.fan.common.Constants;
 import com.fan.common.util.ShaUtil;
 import com.fan.jfinal.base.BaseController;
@@ -16,6 +18,7 @@ public class IndexController extends BaseController {
 	
 	@SuppressWarnings("rawtypes")
 	public void index() {
+		
 		// 最新上传全景图
 		List panoList = Pano.dao.find("select * from pano");
 		setAttr("panoList", panoList);

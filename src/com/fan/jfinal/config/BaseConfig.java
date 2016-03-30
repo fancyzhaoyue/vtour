@@ -1,6 +1,7 @@
 package com.fan.jfinal.config;
 
 import com.fan.jfinal.controller.IndexController;
+import com.fan.jfinal.controller.OauthController;
 import com.fan.jfinal.controller.PublishController;
 import com.fan.jfinal.controller.TourController;
 import com.fan.jfinal.controller.UserController;
@@ -22,7 +23,7 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 public class BaseConfig extends JFinalConfig {
 
 	public void configConstant(Constants me) {
-		PropKit.use("sysconfig.properties");
+		PropKit.use("sysconfigwin.properties");
 		me.setDevMode(PropKit.getBoolean("devmode"));
 		me.setBaseViewPath("/page");
 	}
@@ -31,6 +32,7 @@ public class BaseConfig extends JFinalConfig {
 		me.add("/", IndexController.class);
 		me.add("/u", UserController.class);
 		me.add("/vt", TourController.class);
+		me.add("/oauth", OauthController.class);
 		me.add("/publish", PublishController.class);
 	}
 
