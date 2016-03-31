@@ -6,12 +6,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.fan.common.Constants;
-import com.fan.common.util.ShaUtil;
 import com.fan.jfinal.base.BaseController;
 import com.fan.jfinal.model.Pano;
 import com.fan.jfinal.model.User;
 import com.fan.jfinal.validator.LoginValidator;
 import com.fan.jfinal.validator.SignupValidator;
+import com.fan.util.ShaUtil;
 import com.jfinal.aop.Before;
 
 public class IndexController extends BaseController {

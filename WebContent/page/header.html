@@ -12,24 +12,14 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="headerNav">
-				<!-- <ul class="nav navbar-nav">
-					<li class="active"><a href="#">浏览</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-				</ul>
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-				</form> -->
 				<ul class="nav navbar-nav navbar-right">
 					<#if session?? && session._USER??>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${session._USER.nickName} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="u/${session._USER.id}">我的主页</a></li>
+							<li><a href="u/${session._USER.id}">个人主页</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="publish">发布作品</a></li>
+							<li><a href="publish">修改密码</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="logout">退出</a></li>
 						</ul>
@@ -38,6 +28,10 @@
 					<li><a href="#" data-toggle="modal" data-target="#loginModal">登录</a></li>
 					<li><a href="#" data-toggle="modal" data-target="#signupModal">注册</a></li>
 					</#if>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="/">发现</a></li>
+					<li><a href="publish">上传作品</a></li>
 				</ul>
 			</div>
 		</div>

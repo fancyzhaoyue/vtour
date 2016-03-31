@@ -1,4 +1,4 @@
-package com.fan.common.util;
+package com.fan.util;
 
 import java.security.MessageDigest;
 

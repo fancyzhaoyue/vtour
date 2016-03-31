@@ -243,15 +243,15 @@ public class HttpKit {
 		return sb.toString();
 	}
 	
-	public static String map2Url(Map<String, String> paramToMap) throws UnsupportedEncodingException {
+	public static String map2Url(Map<String, String> paramToMap) {
 		if (null == paramToMap || paramToMap.isEmpty()) {
 			return null;
 		}
 		StringBuffer url = new StringBuffer();
-		boolean isfist = true;
+		boolean isFirst = true;
 		for (Entry<String, String> entry : paramToMap.entrySet()) {
-			if (isfist) {
-				isfist = false;
+			if (isFirst) {
+				isFirst = false;
 			} else {
 				url.append("&");
 			}
@@ -259,6 +259,7 @@ public class HttpKit {
 			String value = entry.getValue();
 			if (StrKit.notBlank(value))
 				try {value = URLEncoder.encode(value, CHARSET);} catch (UnsupportedEncodingException e) {throw new RuntimeException(e);}
+			url.append(value);
 		}
 		return url.toString();
 	}

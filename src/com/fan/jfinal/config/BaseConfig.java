@@ -1,13 +1,14 @@
 package com.fan.jfinal.config;
 
 import com.fan.jfinal.controller.IndexController;
-import com.fan.jfinal.controller.OauthController;
+import com.fan.jfinal.controller.OAuthController;
 import com.fan.jfinal.controller.PublishController;
 import com.fan.jfinal.controller.TourController;
 import com.fan.jfinal.controller.UserController;
 import com.fan.jfinal.interceptor.CommonInterceptor;
 import com.fan.jfinal.model.Pano;
 import com.fan.jfinal.model.User;
+import com.fan.jfinal.model.UserOAuth;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -32,7 +33,7 @@ public class BaseConfig extends JFinalConfig {
 		me.add("/", IndexController.class);
 		me.add("/u", UserController.class);
 		me.add("/vt", TourController.class);
-		me.add("/oauth", OauthController.class);
+		me.add("/oauth", OAuthController.class);
 		me.add("/publish", PublishController.class);
 	}
 
@@ -44,6 +45,7 @@ public class BaseConfig extends JFinalConfig {
 		me.add(arp);
 		
 		arp.addMapping("user", User.class);
+		arp.addMapping("useroauth", UserOAuth.class);
 		arp.addMapping("pano", Pano.class);
 	}
 
