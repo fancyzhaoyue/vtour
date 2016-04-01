@@ -15,7 +15,6 @@
 <link rel="apple-touch-icon" href="" sizes="76x76">
 <link rel="apple-touch-icon" href="" sizes="60x60">
 <link rel="shortcut icon" href="" type="image/x-icon">
-<base href="${CONTEXT_PATH}/">
 <style>
 	@-ms-viewport { width:device-width; }
 	@media only screen and (min-device-width:800px) { html { overflow:hidden; } }
@@ -25,11 +24,11 @@
 </head>
 <body>
 <div id="pano" style="width:100%;height:100%;"></div>
-<script type="text/javascript" src="static/vendor/krpano/krpano-1.19-pr3.js"></script>
+<script type="text/javascript" src="/static/vendor/krpano/krpano-1.19-pr3.js"></script>
 <script>
 	embedpano({
-		swf: "static/vendor/krpano/krpano.swf",
-		xml: "upload/${pano.uid}/${pano.id}/tour.xml",
+		swf: "/static/vendor/krpano/krpano.swf",
+		xml: "/upload/${pano.uid}/${pano.id}/tour.xml",
 		target: "pano",
 		wmode: "Opaque",
 		html5: "prefer"

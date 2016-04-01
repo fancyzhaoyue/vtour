@@ -9,136 +9,32 @@
 <meta name="keywords" content="${webKeywords}">
 <meta name="renderer" content="webkit" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<base href="${CONTEXT_PATH}/">
-<link rel="stylesheet" href="static/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="static/css/main.css">
+<link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
 	<#include "/page/header.html">
-	<div class="content container">
-		<div class="section">
-			<h3 class="page-header">最新上传</h3>
-			<div class="row">
-			<#list panoList as pano>
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
-						<img src="upload/${pano.uid}/${pano.id}/imgs/thumb.jpg" alt="${pano.name}">
-						<div class="caption">
-							<h4><a href="vt/${pano.id}" target="_blank">${pano.name}</a></h4>
+	<div class="slider" id="sliderBox"></div>
+	<div class="container" id="content">
+		<div class="row">
+			<div class="col-sm-6 col-md-9">
+				<div class="row">
+				<#list panoList as pano>
+					<div class="col-sm-6 col-md-3">
+						<div class="thumbnail">
+							<img src="/static/img/thumb.jpg" alt="${pano.name}">
+							<div class="caption">
+								<h4><a href="/vt/${pano.id}" target="_blank">${pano.name}</a></h4>
+							</div>
 						</div>
 					</div>
+				</#list>
 				</div>
-			</#list>
 			</div>
+			<div class="col-sm-6 col-md-3">人气榜单</div>
 		</div>
 	</div>
+	
 	<#include "/page/footer.html">
-	
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">登录</h4>
-				</div>
-				<div class="modal-body">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-6">
-								<form>
-									<div class="form-group"></div>
-									<div class="form-group">
-										<input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
-									</div>
-									<div class="form-group">
-										<input type="password" class="form-control" id="password" name="password" placeholder="密码">
-									</div>
-									<div class="form-group">
-										<button type="button" class="btn btn-primary btn-block login-btn">登录</button>
-									</div>
-								</form>
-							</div>
-							<div class="col-md-6">
-								<div class="center-block">
-									<a href="oauth/login/qqconn">QQ登录</a>
-									<a href="oauth/login/sina">微博登录</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">注册</h4>
-				</div>
-				<div class="modal-body">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-6">
-								<form id="signupForm">
-									<div class="form-group"></div>
-									<div class="form-group">
-										<input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
-									</div>
-									<div class="form-group">
-										<input type="email" class="form-control" id="nickName" name="nickName" placeholder="昵称">
-									</div>
-									<div class="form-group">
-										<input type="password" class="form-control" id="password" name="password" placeholder="密码">
-									</div>
-									<div class="form-group">
-										<button type="button" class="btn btn-primary btn-block signup-btn">注册</button>
-									</div>
-								</form>
-							</div>
-							<div class="col-md-6">
-								<div class="center-block">
-									<a href="#">微博登录</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<script src="static/vendor/jquery/jquery-1.11.3.min.js"></script>
-	<script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		// 登录
-		$('.login-btn').click(function(){
-			$.post('login',{email:$('#email').val(),password:$('#password').val()}, function(data){
-			 	if(data.status == 0){
-					window.location.href= "";
-				}else{
-					alert(data.message);
-				}
-			})
-		});
-		// 注册
-		$('.signup-btn').click(function(){
-			$.post('signup',$('#signupForm').serialize(), function(data){
-				if(data.status == 0){
-					window.location.href= "";
-				}else{
-					alert(data.message);
-				}
-			})
-		})
-	</script>
 </body>
 </html>

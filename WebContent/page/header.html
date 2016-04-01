@@ -1,5 +1,5 @@
 <header>
-	<nav class="navbar-inverse">
+	<nav class="navbar-default">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#headerNav"aria-expanded="false">
@@ -8,20 +8,22 @@
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="">${webName}</a>
+				<a class="navbar-brand" href="/">${webName}</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="headerNav">
 				<ul class="nav navbar-nav navbar-right">
 					<#if session?? && session._USER??>
+					<li ><a href="/">消息</a></li>
+					<li><a href="/publish">上传作品</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${session._USER.nickName} <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="u/${session._USER.id}">个人主页</a></li>
+							<li><a href="/u/${session._USER.id}">个人主页</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="publish">修改密码</a></li>
+							<li><a href="/set/profile">设置</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="logout">退出</a></li>
+							<li><a href="/logout">退出</a></li>
 						</ul>
 					</li>
 					<#else>
@@ -29,11 +31,108 @@
 					<li><a href="#" data-toggle="modal" data-target="#signupModal">注册</a></li>
 					</#if>
 				</ul>
+				
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="/">发现</a></li>
-					<li><a href="publish">上传作品</a></li>
+					<li ><a href="/">发现</a></li>
 				</ul>
+				<form class="navbar-form navbar-left search-form"  action="/search">
+					<div class="input-group">
+				      <input type="text" class="form-control" name="q" placeholder="标题/主创/原作/角色">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				      </span>
+				    </div>
+		        </form>
 			</div>
 		</div>
 	</nav>
 </header>
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">登录</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<form>
+								<div class="form-group"></div>
+								<div class="form-group">
+									<input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary btn-block login-btn">登录</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-6">
+							<div class="center-block">
+								<a href="/oauth/login/qqconn">QQ登录</a>
+								<a href="/oauth/login/sina">微博登录</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">注册</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6">
+							<form id="signupForm">
+								<div class="form-group"></div>
+								<div class="form-group">
+									<input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
+								</div>
+								<div class="form-group">
+									<input type="email" class="form-control" id="nickName" name="nickName" placeholder="昵称">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="password" name="password" placeholder="密码">
+								</div>
+								<div class="checkbox">
+								    <label>
+								      <input type="checkbox"> <a href="/" target="_blank">同意VRena注册协议</a>
+								    </label>
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary btn-block signup-btn">注册</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-6">
+							<div class="center-block">
+								<a href="/oauth/login/qqconn">QQ登录</a>
+								<a href="/oauth/login/sina">微博登录</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

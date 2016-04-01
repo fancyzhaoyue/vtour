@@ -2,15 +2,17 @@ package com.fan.jfinal.controller;
 
 
 import java.io.File;
-
 import com.fan.common.Constants;
 import com.fan.jfinal.base.BaseController;
+import com.fan.jfinal.interceptor.LoginInterceptor;
 import com.fan.jfinal.model.Pano;
 import com.fan.jfinal.model.User;
 import com.fan.util.KrpanoUtil;
+import com.jfinal.aop.Before;
 import com.jfinal.upload.UploadFile;
-
+@Before(LoginInterceptor.class)
 public class PublishController extends BaseController {
+	
 	
 	public void index() {
 		render("publish.html");

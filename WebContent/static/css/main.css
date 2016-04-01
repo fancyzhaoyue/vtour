@@ -1,4 +1,25 @@
+.search-form{
+	padding-left:40px;
+}
+
+.slider{
+	margin-bottom:50px;
+	min-height:350px;
+	background-color: #BDC3C7;
+}
+
+/**********用户******************/
+.showcase{
+	margin-bottom:50px;
+	min-height:350px;
+	background-color: #BDC3C7;	
+}
+
+.setting-main{
+	padding: 25px 0 50px;
+}
 .content{
+	
 	min-height:400px;
 }
 .footer {

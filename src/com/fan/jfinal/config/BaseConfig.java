@@ -3,6 +3,7 @@ package com.fan.jfinal.config;
 import com.fan.jfinal.controller.IndexController;
 import com.fan.jfinal.controller.OAuthController;
 import com.fan.jfinal.controller.PublishController;
+import com.fan.jfinal.controller.SetController;
 import com.fan.jfinal.controller.TourController;
 import com.fan.jfinal.controller.UserController;
 import com.fan.jfinal.interceptor.CommonInterceptor;
@@ -15,7 +16,6 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
-import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -31,9 +31,15 @@ public class BaseConfig extends JFinalConfig {
 
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class);
+		
 		me.add("/u", UserController.class);
+		
 		me.add("/vt", TourController.class);
+		
+		me.add("/set", SetController.class);
+		
 		me.add("/oauth", OAuthController.class);
+		
 		me.add("/publish", PublishController.class);
 	}
 
@@ -58,7 +64,7 @@ public class BaseConfig extends JFinalConfig {
 
 	public void configHandler(Handlers me) {
 
-		me.add(new ContextPathHandler());
+		//me.add(new ContextPathHandler());
 
 	}
 

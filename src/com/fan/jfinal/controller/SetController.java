@@ -1,54 +1,40 @@
 package com.fan.jfinal.controller;
 
-
-import java.util.List;
-
 import com.fan.common.Constants;
 import com.fan.jfinal.base.BaseController;
-import com.fan.jfinal.model.Pano;
+import com.fan.jfinal.interceptor.LoginInterceptor;
 import com.fan.jfinal.model.User;
-import com.fan.jfinal.validator.LoginValidator;
 import com.fan.jfinal.validator.SignupValidator;
 import com.fan.util.ShaUtil;
 import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.POST;
 
-public class IndexController extends BaseController {
+@Before(LoginInterceptor.class)
+public class SetController extends BaseController {
 	
-	@SuppressWarnings("rawtypes")
-	public void index() {
-		
-		// 最新上传全景图
-		List panoList = Pano.dao.find("select * from pano");
-		setAttr("panoList", panoList);
-		
-		render("index.html");
+	public void profile() {
+		render("profile.html");
 	}
-
-	@Before(LoginValidator.class)
-	public void login() {
-
-		// 查询用户是否存在
-		User user = User.dao.findFirst("select * from user where email = ? ", getPara("email"));
-		if(user == null){
-			renderMsg(404, "用户不存在");
-			return;
-		}
+	
+	@Before(POST.class)
+	public void doProfile(){
+		User user = getSessionAttr(Constants.SESSION_USER);
 		
-		// 验密
-		String shaPwd = ShaUtil.encode("SHA", getPara("password"));
-		if(!shaPwd.equals(user.get("password"))){
-			renderMsg(403, "密码错误");
-			return;
-		}
-		
-		// 初始化用户
-		user.remove("password");
+		user.set("nickName", getPara("nickName"));
+		user.update();
 		
 		setSessionAttr(Constants.SESSION_USER, user);
 		setAttr("data", user);
 		renderMsg();
 	}
 	
+	public void account() {
+		render("index.html");
+	}
+	
+	public void message() {
+		render("index.html");
+	}
 	public void logout() {
 		removeSessionAttr(Constants.SESSION_USER);
 		redirect("/");

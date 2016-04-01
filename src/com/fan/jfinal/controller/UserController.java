@@ -1,17 +1,21 @@
 package com.fan.jfinal.controller;
 
+import java.util.List;
+
 import com.fan.jfinal.base.BaseController;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Record;
+import com.fan.jfinal.model.Pano;
+import com.fan.jfinal.model.User;
 
 public class UserController extends BaseController {
 	
 	public void index() {
 		
-		String sql = "select id,nickname,email,uid from user where uid= ?";
-		Record user = Db.findFirst(sql, getPara(0));
-		System.out.println(user.get("nickname"));
+		User user = User.dao.findById(getPara());
 		setAttr("user", user);
+		
+		List<Pano> panoList = Pano.dao.find("select * from pano where uid= ?", user.get("id"));
+		setAttr("panoList", panoList);
+		
 		render("user.html");
 	}
 	
