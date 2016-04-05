@@ -18,51 +18,79 @@
 		<div class="row setting-main">
 			<div class="col-md-5 col-md-offset-3">
 				<form class="form-horizontal" id="profileForm">
+					
 					<div class="form-group">
-						<label for="nickName" class="col-sm-2 control-label">昵称</label>
-						<div class="col-sm-10">
+						<label for="uid" class="col-sm-4 control-label">ID</label>
+						<div class="col-sm-8">
+							<label class="control-label">${session._USER.uid}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="nickName" class="col-sm-4 control-label">昵称</label>
+						<div class="col-sm-8">
 							<input type="text" class="form-control" name="nickName" value="${session._USER.nickName}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">性别</label>
-						<div class="col-sm-10">
+						<label class="col-sm-4 control-label">性别</label>
+						<div class="col-sm-8">
 							<label class="radio-inline">
 							  <input type="radio" name="gender" value="0"> 男
 							</label>
 							<label class="radio-inline">
 							  <input type="radio" name="gender" value="1"> 女
 							</label>
+							<label class="checkbox-inline">
+							  <input type="checkbox" name="pubGender" value="1"> 公开
+							</label>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">城市</label>
-						<div class="col-sm-10">
+						<label class="col-sm-4 control-label">星座</label>
+						<div class="col-sm-8">
 							<select class="form-control" name="city">
-							  <option value="北京">北京</option>
+							  <option value="">请选择</option>
+							  <option value="1">白羊座</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">简介</label>
-						<div class="col-sm-10">
+						<label class="col-sm-4 control-label">所在地</label>
+						<div class="col-sm-4">
+							<select class="form-control" name="city">
+							  <option value="">请选择</option>
+							  <option value="北京">北京</option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" name="city">
+							  <option value="">请选择</option>
+							  <option value="西城区">西城区</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">简介</label>
+						<div class="col-sm-8">
 							<textarea class="form-control" rows="5" cols="" placeholder="懒癌患者，什么也没有留下╮(╯▽╰)╭"></textarea>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="email" class="col-sm-2 control-label">邮箱</label>
-						<div class="col-sm-10">
-							<#if session._USER.email??>
-								${session._USER.email} <a>修改</a>
+						<label for="email" class="col-sm-4 control-label">绑定邮箱</label>
+						<div class="col-sm-8">
+							<label class="control-label">
+							<#if session._USER.email?? && session._USER.email == ''>
+								${session._USER.email} <a href="#" data-toggle="modal" data-target="#modifyEmail">修改</a>
 							<#else>
-							<label class="radio-inline"><a href="/set/profile">立即绑定</a></label>
+								<a href="#" data-toggle="modal" data-target="#bindEmail">立即绑定</a>
 							</#if>
+							</label>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-4 col-sm-10">
 							<button type="button" class="btn btn-primary profile-save-btn">保存</button>
 						</div>
 					</div>
@@ -71,5 +99,70 @@
 		</div>
 	</div>
 	<#include "/page/footer.html">
+	
+<div class="modal fade" id="bindEmail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">绑定邮箱</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-offset-3 col-md-6">
+							<form>
+								<div class="form-group"></div>
+								<div class="form-group">
+									<input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary btn-block">完成</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modifyEmail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">修改邮箱</h4>
+			</div>
+			<div class="modal-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-offset-3 col-md-6">
+							<form>
+								<div class="form-group"></div>
+								<div class="form-group">
+									<input type="email" class="form-control" id="oldEmail" name="oldEmail" placeholder="原邮箱">
+								</div>
+								<div class="form-group">
+									<input type="email" class="form-control" id="newEmail" name="newEmail" placeholder="新邮箱">
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary btn-block">完成</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

@@ -17,6 +17,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.ext.interceptor.SessionInViewInterceptor;
+import com.jfinal.i18n.I18nInterceptor;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
@@ -24,9 +25,15 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 public class BaseConfig extends JFinalConfig {
 
 	public void configConstant(Constants me) {
+		
 		PropKit.use("sysconfigwin.properties");
 		me.setDevMode(PropKit.getBoolean("devmode"));
+		
+		// 设置页面基本路径
 		me.setBaseViewPath("/page");
+		
+		// 设置默认i18n文件名
+		me.setI18nDefaultBaseName("/config/msg/dictionary");
 	}
 
 	public void configRoute(Routes me) {
@@ -59,7 +66,7 @@ public class BaseConfig extends JFinalConfig {
 		
 		me.add(new CommonInterceptor());
 		me.add(new SessionInViewInterceptor());
-		
+		me.add(new I18nInterceptor());
 	}
 
 	public void configHandler(Handlers me) {
