@@ -33,7 +33,7 @@
 				<#list panoList as pano>
 					<div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
-							<img src="/static/img/thumb.jpg" alt="${pano.name}">
+							<img src="${pano.thumb!'/static/img/thumb.jpg'}" alt="${pano.name}">
 							<div class="caption">
 								<h4><a href="/vt/${pano.id}" target="_blank">${pano.name}</a></h4>
 							</div>

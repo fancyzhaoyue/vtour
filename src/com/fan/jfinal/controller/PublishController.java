@@ -2,6 +2,8 @@ package com.fan.jfinal.controller;
 
 
 import java.io.File;
+import java.util.Date;
+
 import com.fan.common.Constants;
 import com.fan.jfinal.base.BaseController;
 import com.fan.jfinal.interceptor.LoginInterceptor;
@@ -28,8 +30,15 @@ public class PublishController extends BaseController {
 		
 		//新增全景图记录
 		Pano pano = getModel(Pano.class);
-		pano.set("name", getPara("name"));
-		pano.set("uid", user.get("id"));
+		pano.set("uid",      user.get("id"));
+		pano.set("name",     getPara("name"));
+		pano.set("desc",     getPara("desc"));
+		pano.set("thumb",    getPara("thumb"));
+		pano.set("creative", getPara("creative"));
+		pano.set("actor",    getPara("actor"));
+		pano.set("original", getPara("original"));
+		pano.set("video",    getPara("video"));
+		pano.set("createDate", new Date());
 		pano.save();
 		
 		//文件重命名并通过调用cmd处理全景图
@@ -38,6 +47,9 @@ public class PublishController extends BaseController {
 		File dest = new File(path, filename); 
 		panoFile.getFile().renameTo(dest);
 		KrpanoUtil.makepano(dest.getAbsolutePath());
+		
+		pano.set("thumb",    "/upload/"+ uid + "/" + pano.get("id") + "/imgs/thumb.jpg");
+		pano.update();
 		
 		redirect("/publish/add");
 		

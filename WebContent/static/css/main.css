@@ -10,7 +10,6 @@
 
 /**********用户******************/
 .showcase{
-	margin-bottom:50px;
 	min-height:350px;
 	background-color: #BDC3C7;	
 }
@@ -18,8 +17,8 @@
 .setting-main{
 	padding: 25px 0 50px;
 }
-.content{
-	
+#content{
+	margin-top:20px;
 	min-height:400px;
 }
 .footer {

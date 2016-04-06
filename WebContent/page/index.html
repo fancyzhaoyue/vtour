@@ -19,19 +19,26 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-9">
 				<div class="row">
-				<#list panoList as pano>
+				<#list panoPage.list as pano>
 					<div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
-							<img src="/static/img/thumb.jpg" alt="${pano.name}">
+							<img src="${pano.thumb!'/static/img/thumb.jpg'}" alt="${pano.name}">
 							<div class="caption">
 								<h4><a href="/vt/${pano.id}" target="_blank">${pano.name}</a></h4>
+								<p><a href="/u/${pano.uid}">${pano.nickName}</a>/${pano.creative}</p>
 							</div>
 						</div>
 					</div>
 				</#list>
 				</div>
+				<button type="button" class="btn btn-primary btn-block load-more-btn">点击加载更多</button>
 			</div>
-			<div class="col-sm-6 col-md-3">人气榜单</div>
+			<div class="col-sm-6 col-md-3">
+			人气榜单
+			<#list rankPano as pano>
+				<p>${pano_index +1 } <a href="/vt/${pano.id}" target="_blank">${pano.name}</a></p>
+			</#list>
+			</div>
 		</div>
 	</div>
 	

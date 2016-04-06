@@ -2,6 +2,7 @@ package com.fan.jfinal.controller;
 
 import com.fan.jfinal.base.BaseController;
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
 public class TourController extends BaseController {
@@ -14,5 +15,9 @@ public class TourController extends BaseController {
 		
 		render("vtour.html");
 	}
-	
+	public void getMore() {
+		Page<Record> panoPage = Db.paginate(getParaToInt(), 12, "select a.*,b.nickName","from pano a ,user b where a.uid=b.uid order by id desc");
+		setAttr("data", panoPage);
+		renderMsg();
+	}
 }

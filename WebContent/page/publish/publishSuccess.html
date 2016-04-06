@@ -10,16 +10,14 @@
 <meta name="renderer" content="webkit" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
 	<#include "/page/header.html">
-	<div class="content" style="height:500px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
-					<p class="bg-success">处理成功</p>
-				</div>
-			</div>
+	<div class="container" id="content">
+		<div class="jumbotron" style="text-align: center;">
+		  <p>图片发布成功了哟~~~</p>
+		  <p><a href="/u/${session._USER.id}" >个人主页</a></p>
 		</div>
 	</div>
 	<#include "/page/footer.html">

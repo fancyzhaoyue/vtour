@@ -29,3 +29,16 @@ $('.profile-save-btn').click(function(){
 		}
 	})
 });
+
+$('.load-more-btn').click(function(){
+	$.get('/vt/getMore/2', function(data){
+		if(data.status == 0){
+			if(data.pageNumber == data.totalPage){
+				$('.load-more-btn').addClass('disabled');
+				$('.load-more-btn').html('没有更多了');
+			}
+		}else{
+			alert(data.message);
+		}
+	})
+});

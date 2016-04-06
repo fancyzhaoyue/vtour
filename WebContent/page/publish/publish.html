@@ -14,62 +14,60 @@
 </head>
 <body>
 	<#include "/page/header.html">
-	<div class="content" style="height:500px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-5 col-md-offset-3">
-					<form class="form-horizontal" action="publish/create" method="post" enctype="multipart/form-data" >
-						<div class="form-group"></div>
-						
-						<div class="form-group">
-							<label for="nickName" class="col-sm-4 control-label">全景图</label>
-							<div class="col-sm-8">
-								<input type="file" class="form-control" id="panoFile" name="panoFile" placeholder="全景图">
-							</div>
+	<div class="container" id="content">
+		<div class="row">
+			<div class="col-md-5 col-md-offset-3">
+				<form class="form-horizontal" action="publish/create" method="post" enctype="multipart/form-data" >
+					<div class="form-group"></div>
+					
+					<div class="form-group">
+						<label for="nickName" class="col-sm-4 control-label">全景图</label>
+						<div class="col-sm-8">
+							<input type="file" class="form-control" id="panoFile" name="panoFile" placeholder="全景图">
 						</div>
-						<div class="form-group">
-							<label for="nickName" class="col-sm-4 control-label">标题</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" name="name" value="">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="nickName" class="col-sm-4 control-label">标题</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="name" value="">
 						</div>
-						<div class="form-group">
-							<label for="nickName" class="col-sm-4 control-label">主创</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" name="name" value="">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="nickName" class="col-sm-4 control-label">主创</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="creative" value="">
 						</div>
-						<div class="form-group">
-							<label for="nickName" class="col-sm-4 control-label">角色</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" name="name" value="">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="nickName" class="col-sm-4 control-label">角色</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="actor" value="">
 						</div>
-						<div class="form-group">
-							<label for="nickName" class="col-sm-4 control-label">原作</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" name="name" value="">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="nickName" class="col-sm-4 control-label">原作</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="original" value="">
 						</div>
-						<div class="form-group">
-							<label for="nickName" class="col-sm-4 control-label">视频地址</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" name="name" value="">
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="nickName" class="col-sm-4 control-label">视频地址</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="video" value="">
 						</div>
-						<div class="form-group">
-							<label class="col-sm-4 control-label">简介</label>
-							<div class="col-sm-8">
-								<textarea class="form-control" rows="5" cols="" placeholder=""></textarea>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-4 control-label">简介</label>
+						<div class="col-sm-8">
+							<textarea class="form-control" rows="5" cols="" name="desc"></textarea>
 						</div>
-						<div class="form-group">
-							<div class="col-sm-offset-6 col-sm-4">
-								<button type="submit" class="btn btn-primary btn-block">发布</button>
-							</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-6 col-sm-4">
+							<button type="submit" class="btn btn-primary btn-block">发布</button>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
