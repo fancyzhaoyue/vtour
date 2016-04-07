@@ -1,29 +1,18 @@
 package com.fan.jfinal.controller;
 
-import java.util.List;
 
 import com.fan.common.Constants;
 import com.fan.jfinal.base.BaseController;
-import com.fan.jfinal.model.Pano;
 import com.fan.jfinal.model.User;
 import com.fan.jfinal.validator.LoginValidator;
 import com.fan.jfinal.validator.SignupValidator;
 import com.fan.util.ShaUtil;
 import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.ext.interceptor.POST;
 
 public class IndexController extends BaseController {
 	
 	public void index() {
-		// 最新上传全景图
-		Page<Record> panoPage = Db.paginate(1, 12, "select a.*,b.nickName","from pano a ,user b where a.uid=b.uid order by id desc");
-		setAttr("panoPage", panoPage);
-		
-		List panoList = Pano.dao.find("select * from pano limit 10");
-		setAttr("rankPano", panoList);
-		
 		render("index.html");
 	}
 	@Before(LoginValidator.class)
@@ -56,7 +45,7 @@ public class IndexController extends BaseController {
 		redirect("/");
 	}
 	
-	@Before(SignupValidator.class)
+	@Before({POST.class, SignupValidator.class})
 	public void signup() {
 		
 		// 验证邮箱唯一性
@@ -79,7 +68,6 @@ public class IndexController extends BaseController {
 		
 		user.remove("password");
 		setSessionAttr(Constants.SESSION_USER, user);
-		setAttr("data", user);
-		renderMsg();
+		
 	}
 }

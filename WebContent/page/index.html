@@ -17,31 +17,66 @@
 	<div class="slider" id="sliderBox"></div>
 	<div class="container" id="content">
 		<div class="row">
-			<div class="col-sm-6 col-md-9">
-				<div class="row">
-				<#list panoPage.list as pano>
-					<div class="col-sm-6 col-md-3">
-						<div class="thumbnail">
-							<img src="${pano.thumb!'/static/img/thumb.jpg'}" alt="${pano.name}">
-							<div class="caption">
-								<h4><a href="/vt/${pano.id}" target="_blank">${pano.name}</a></h4>
-								<p><a href="/u/${pano.uid}">${pano.nickName}</a>/${pano.creative}</p>
-							</div>
-						</div>
-					</div>
-				</#list>
-				</div>
+			<div class="col-sm-6 col-md-9" id="vtList">
+				<div class="row"></div>
 				<button type="button" class="btn btn-primary btn-block load-more-btn">点击加载更多</button>
 			</div>
-			<div class="col-sm-6 col-md-3">
+			<div class="col-sm-6 col-md-3" id="vtRank">
 			人气榜单
-			<#list rankPano as pano>
-				<p>${pano_index +1 } <a href="/vt/${pano.id}" target="_blank">${pano.name}</a></p>
-			</#list>
 			</div>
 		</div>
 	</div>
-	
 	<#include "/page/footer.html">
+	
+	<script id="vtListTmpl" type="text/html">
+    {{each data.list as pano index}}
+	<div class="col-sm-6 col-md-3">
+	    <div class="thumbnail">
+	        <img src="{{pano.thumb}}" alt="{{pano.name}}">
+	        <div class="caption">
+	            <h4><a href="/vt/{{pano.id}}" target="_blank">{{pano.name}}</a></h4>
+	            <p><a href="/u/{{pano.uid}}">{{pano.nickName}}</a>/{{pano.creative}}</p>
+	        </div>
+	    </div>
+	</div>
+    {{/each}}
+	</script>
+	<script id="vtRankTmpl" type="text/html">
+    {{each data as pano index}}
+	<p>{{index +1 }} <a href="/vt/{{pano.id}}" target="_blank">{{pano.name}}</a></p>
+    {{/each}}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var pageNumber = 1;
+			var loadMore = function() {
+				$.get('/vt/getVt/' + pageNumber, function(response){
+					if(response.status == 0){
+						pageNumber++;
+						$('#vtList .row').append(template('vtListTmpl', response));
+						if(pageNumber > 5 || response.data.pageNumber==response.data.totalPage){
+							$('.load-more-btn').addClass('disabled');
+							$('.load-more-btn').html('没有更多了');
+						}
+					}else{
+						alert(response.message);
+					}
+				})
+			};
+			loadMore();
+			$('.load-more-btn').click(loadMore);
+			
+			var loadRank = function() {
+				$.get('/vt/getVtRank/10', function(response){
+					if(response.status == 0){
+						$('#vtRank').append(template('vtRankTmpl', response));
+					}else{
+						alert(response.message);
+					}
+				})
+			};
+			loadRank();
+		});
+	</script>
 </body>
 </html>

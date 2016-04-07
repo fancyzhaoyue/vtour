@@ -9,15 +9,19 @@ $('.login-btn').click(function(){
 	})
 });
 // 注册
-$('.signup-btn').click(function(){
+/*$('.signup-btn').click(function(){
 	$.post('/signup',$('#signupForm').serialize(), function(data){
 		if(data.status == 0){
 			window.location.href= "";
 		}else{
-			alert(data.message);
+			sweetAlert(
+					  'Oops...',
+					  'Something went wrong!',
+					  'error'
+					)
 		}
 	})
-});
+});*/
 
 //修改用户资料
 $('.profile-save-btn').click(function(){
@@ -30,15 +34,4 @@ $('.profile-save-btn').click(function(){
 	})
 });
 
-$('.load-more-btn').click(function(){
-	$.get('/vt/getMore/2', function(data){
-		if(data.status == 0){
-			if(data.pageNumber == data.totalPage){
-				$('.load-more-btn').addClass('disabled');
-				$('.load-more-btn').html('没有更多了');
-			}
-		}else{
-			alert(data.message);
-		}
-	})
-});
+
