@@ -63,7 +63,7 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-6">
-							<form>
+							<form id="loginForm">
 								<div class="form-group"></div>
 								<div class="form-group">
 									<input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
@@ -115,9 +115,9 @@
 								<div class="form-group">
 									<input type="password" class="form-control" id="password" name="password" placeholder="密码">
 								</div>
-								<div class="checkbox">
+								<div class="form-group checkbox">
 								    <label>
-								      <input type="checkbox"> <a href="/" target="_blank">同意VRena注册协议</a>
+								      <input type="checkbox" name="agree" checked> <a href="/" target="_blank">同意VRena注册协议</a>
 								    </label>
 								</div>
 								<div id="signupErrorMsg"></div>

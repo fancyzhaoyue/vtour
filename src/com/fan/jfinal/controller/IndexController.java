@@ -17,11 +17,9 @@ import com.fan.common.Constants;
 import com.fan.common.mail.MailAuthenticator;
 import com.fan.common.util.DateUtil;
 import com.fan.common.util.ShaUtil;
-import com.fan.core.BaseBussException;
 import com.fan.jfinal.base.BaseController;
 import com.fan.jfinal.model.EmailToken;
 import com.fan.jfinal.model.User;
-import com.fan.jfinal.validator.LoginValidator;
 import com.fan.jfinal.validator.SignupValidator;
 import com.jfinal.aop.Before;
 import com.jfinal.ext.interceptor.NoUrlPara;
@@ -31,29 +29,7 @@ import com.jfinal.kit.HashKit;
 public class IndexController extends BaseController {
 	
 	@Before(NoUrlPara.class)
-	public void index()  {}
-	
-	@Before(LoginValidator.class)
-	public void login() {
-		// 查询用户是否存在
-		User user = User.dao.getUserByUniqueId(getPara("email"));
-		if(user == null){
-			throw new BaseBussException("用户不存在");
-		}
-		
-		// 验密
-		String shaPwd = ShaUtil.encode("SHA", getPara("password"));
-		if(!shaPwd.equals(user.get("password"))){
-			throw new BaseBussException("密码错误");
-		}
-		
-		// 初始化用户
-		user.remove("password");
-		
-		setSessionAttr(Constants.SESSION_USER, user);
-		setAttr("data", user);
-		renderMsg();
-	}
+	public void index() {}
 	
 	public void logout() {
 		removeSessionAttr(Constants.SESSION_USER);
@@ -69,7 +45,6 @@ public class IndexController extends BaseController {
 			renderMsg(403, "邮箱已存在");
 			return;
 		}
-		
 		// 注册用户
 		User user = getModel(User.class);
 		user.set("email",    getPara("email"));
