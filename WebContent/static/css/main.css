@@ -8,6 +8,18 @@
 	background-color: #BDC3C7;
 }
 
+#signupErrorMsg, 
+#loginErrorMsg {
+  background-color: #f22931;
+  border-radius: 0px;
+  padding: 10px;
+  color: #ffffff;
+  display: none;
+  margin-bottom: 15px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,.5);
+}
+
+
 /**********用户******************/
 .showcase{
 	min-height:350px;

@@ -4,24 +4,20 @@ $('.login-btn').click(function(){
 	 	if(data.status == 0){
 			window.location.href= "";
 		}else{
-			alert(data.message);
+			$('#loginErrorMsg').html(data.message).show();
 		}
 	})
 });
 // 注册
-/*$('.signup-btn').click(function(){
+$('.signup-btn').click(function(){
 	$.post('/signup',$('#signupForm').serialize(), function(data){
 		if(data.status == 0){
-			window.location.href= "";
+			window.location.href= "/register";
 		}else{
-			sweetAlert(
-					  'Oops...',
-					  'Something went wrong!',
-					  'error'
-					)
+			$('#signupErrorMsg').html(data.message).show();
 		}
 	})
-});*/
+});
 
 //修改用户资料
 $('.profile-save-btn').click(function(){

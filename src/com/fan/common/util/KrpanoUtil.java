@@ -1,4 +1,4 @@
-package com.fan.util;
+package com.fan.common.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

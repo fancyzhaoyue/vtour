@@ -1,5 +1,6 @@
 package com.fan.jfinal.config;
 
+import com.fan.jfinal.controller.AccountController;
 import com.fan.jfinal.controller.IndexController;
 import com.fan.jfinal.controller.OAuthController;
 import com.fan.jfinal.controller.PublishController;
@@ -7,6 +8,8 @@ import com.fan.jfinal.controller.SetController;
 import com.fan.jfinal.controller.TourController;
 import com.fan.jfinal.controller.UserController;
 import com.fan.jfinal.interceptor.CommonInterceptor;
+import com.fan.jfinal.interceptor.ExceptionInterceptor;
+import com.fan.jfinal.model.EmailToken;
 import com.fan.jfinal.model.Pano;
 import com.fan.jfinal.model.User;
 import com.fan.jfinal.model.UserOAuth;
@@ -34,6 +37,8 @@ public class BaseConfig extends JFinalConfig {
 		
 		// 设置默认i18n文件名
 		me.setI18nDefaultBaseName("/config/msg/dictionary");
+		
+		me.setError404View("error/404.html");
 	}
 
 	public void configRoute(Routes me) {
@@ -48,6 +53,9 @@ public class BaseConfig extends JFinalConfig {
 		me.add("/oauth", OAuthController.class);
 		
 		me.add("/publish", PublishController.class);
+		
+		me.add("/account", AccountController.class);
+		
 	}
 
 	public void configPlugin(Plugins me) {
@@ -60,11 +68,13 @@ public class BaseConfig extends JFinalConfig {
 		arp.addMapping("user", User.class);
 		arp.addMapping("useroauth", UserOAuth.class);
 		arp.addMapping("pano", Pano.class);
+		arp.addMapping("emailtoken", EmailToken.class);
 	}
 
 	public void configInterceptor(Interceptors me) {
 		
 		me.add(new CommonInterceptor());
+		me.add(new ExceptionInterceptor());
 		me.add(new SessionInViewInterceptor());
 		me.add(new I18nInterceptor());
 	}
