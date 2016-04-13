@@ -1,9 +1,16 @@
 package com.fan.jfinal.controller;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.UUID;
+
 import com.fan.common.Constants;
+import com.fan.common.mail.MailSenderService;
+import com.fan.common.util.DateUtil;
 import com.fan.core.BaseBussException;
 import com.fan.jfinal.base.BaseController;
 import com.fan.jfinal.interceptor.LoginInterceptor;
+import com.fan.jfinal.model.EmailToken;
 import com.fan.jfinal.model.User;
 import com.fan.jfinal.validator.LoginValidator;
 import com.fan.jfinal.validator.SignupValidator;
@@ -59,7 +66,19 @@ public class AccountController extends BaseController {
 		regUser.update();
 		setSessionAttr(Constants.SESSION_USER, regUser);
 		
-		setAttr("data", user);
+		setAttr("data", regUser);
 		renderMsg();
+		
+		// 生成token
+		EmailToken token = new EmailToken();
+		token.set("token",  UUID.randomUUID().toString());
+		token.set("userid", regUser.get("id"));
+		token.set("tokenType", "1");
+		token.set("expiryDate", DateUtil.rollDateByDateUnit(new Date(), 1440, false, Calendar.MINUTE));
+		token.save();
+		
+		// 发送注册邮件
+		token.put("email", getPara("email"));
+		enhance(MailSenderService.class).sendRegistrationEmail(token);
 	}
 }
