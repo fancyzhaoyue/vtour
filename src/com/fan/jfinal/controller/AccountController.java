@@ -81,4 +81,12 @@ public class AccountController extends BaseController {
 		token.put("email", getPara("email"));
 		enhance(MailSenderService.class).sendRegistrationEmail(token);
 	}
+	
+	public void activate() {
+		EmailToken token = EmailToken.dao.findFirst("select * from emailtoken where token = ?", getPara());
+		if(token == null){
+			throw new BaseBussException("激活链接已过期");
+		}
+		redirect("/");
+	}
 }
