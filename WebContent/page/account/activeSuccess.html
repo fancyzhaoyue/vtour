@@ -16,10 +16,22 @@
 	<#include "/page/header.html">
 	<div class="container" id="content">
 		<div class="jumbotron" style="text-align: center;">
-		  <p>${message!}</p>
-		  <p><a href="/" >返回首页</a></p>
+		  <p>恭喜，您的邮箱已经激活!</p>
+		  <p><span>5</span>秒后跳转至网站<a href="/">首页</a></p>
 		</div>
 	</div>
 	<#include "/page/footer.html">
+	<script>
+	var turnPageUrl = 'http://www.11kankan.com';
+	//setCountdown(4,'content p span ',turnPageUrl);	//调用倒计时
+	
+	function setCountdown(time,id,url){
+		var count = setTimeout(function(){$("#"+id).html(time);setCountdown(time-1,id,url)},1000);
+		if(time==-1){
+			clearTimeout(count);
+			window.location.href=url;
+		}
+	}
+	</script>
 </body>
 </html>

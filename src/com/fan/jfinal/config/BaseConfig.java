@@ -29,7 +29,7 @@ public class BaseConfig extends JFinalConfig {
 
 	public void configConstant(Constants me) {
 		
-		PropKit.use("sysconfigwin.properties");
+		PropKit.use("sysconfig.properties");
 		me.setDevMode(PropKit.getBoolean("devmode"));
 		
 		// 设置页面基本路径
@@ -68,7 +68,7 @@ public class BaseConfig extends JFinalConfig {
 		arp.addMapping("user", User.class);
 		arp.addMapping("useroauth", UserOAuth.class);
 		arp.addMapping("pano", Pano.class);
-		arp.addMapping("emailtoken", EmailToken.class);
+		arp.addMapping("emailtoken", "token", EmailToken.class);
 	}
 
 	public void configInterceptor(Interceptors me) {

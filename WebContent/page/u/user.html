@@ -19,32 +19,58 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-3">
 				<div class="profile">
-					<h4>${user.nickName}</h4>
-					<p>${user.desc}</p>
-					<p>城市: ${user.city}</p>
-					<p>性别: <#if user.gender == '0'>男</#if><#if user.gender == '1'>女</#if><#if user.gender == '2'>未知</#if></p>
+					<h4>${user.nickName!}</h4>
+					<p>${user.desc!}</p>
+					<p>城市: ${user.city!}</p>
+					<p>性别: <#if user.gender?? && user.gender == '0'>男</#if><#if user.gender?? && user.gender == '1'>女</#if><#if user.gender?? && user.gender == '2'>未知</#if></p>
 					<#if session?? && session._USER?? && session._USER.id == user.id>
 						<p><a href="/set/profile">编辑个人信息</a></p>
 					</#if>
 				</div>
 			</div>
-			<div class="col-sm-6 col-md-9">
-				<div class="row">
-				<#list panoList as pano>
-					<div class="col-sm-6 col-md-3">
-						<div class="thumbnail">
-							<img src="${pano.thumb!'/static/img/thumb.jpg'}" alt="${pano.name}">
-							<div class="caption">
-								<h4><a href="/vt/${pano.id}" target="_blank">${pano.name}</a></h4>
-							</div>
-						</div>
-					</div>
-				</#list>
-				</div>
-				<button type="button" class="btn btn-primary btn-block">点击加载更多</button>
+			<div class="col-sm-6 col-md-9" id="vtList">
+				<div class="row"></div>
+				<button type="button" class="btn btn-primary btn-block load-more-btn">点击加载更多</button>
 			</div>
 		</div>
 	</div>
 	<#include "/page/footer.html">
+	
+	<script id="vtListTmpl" type="text/html">
+    {{each data.list as pano index}}
+	<div class="col-sm-6 col-md-3">
+	    <div class="thumbnail">
+	        <img src="{{pano.thumb}}" alt="{{pano.name}}">
+	        <div class="caption">
+	            <h4><a href="/vt/{{pano.id}}" target="_blank">{{pano.name}}</a></h4>
+	            <p>{{pano.creative}}</p>
+	        </div>
+	    </div>
+	</div>
+    {{/each}}
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var pageNumber = 1;
+			var loadMore = function() {
+				$.get('/vt/getVtByUid/' + pageNumber, {uid: ${user.id}},function(response){
+					console.log(response);
+					if(response.status == 0){
+						pageNumber++;
+						$('#vtList .row').append(template('vtListTmpl', response));
+						if(pageNumber > 5 || response.data.pageNumber==response.data.totalPage || response.data.totalPage==0){
+							$('.load-more-btn').addClass('disabled');
+							$('.load-more-btn').html('没有更多了');
+						}
+					}else{
+						alert(response.message);
+					}
+				})
+			};
+			loadMore();
+			$('.load-more-btn').click(loadMore);
+		});
+	</script>
 </body>
 </html>

@@ -6,6 +6,8 @@ import java.util.concurrent.Executors;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
+import com.jfinal.kit.PropKit;
+
 public class MailSender {
 	
 	private static ExecutorService executor = null;
@@ -38,13 +40,13 @@ public class MailSender {
 		HtmlEmail email = new HtmlEmail();
 		try {
 			email.setCharset("UTF-8");
-			email.setHostName("smtp.163.com");
-			email.setSmtpPort(25);
-			email.setSSLOnConnect(false);
-			email.setStartTLSEnabled(false);
-			email.setDebug(true);
-			email.setAuthentication("fzyue163@163.com", "Fanzhaoyue0214");
-			email.setFrom("fzyue163@163.com");
+			email.setHostName(PropKit.get("mail.smtp.host"));
+			email.setSmtpPort(PropKit.getInt("mail.stmp.port"));
+			email.setSSLOnConnect(PropKit.getBoolean("mail.smtp.ssl"));
+			email.setStartTLSEnabled(PropKit.getBoolean("mail.smtp.tls"));
+			email.setDebug(PropKit.getBoolean("mail.debug"));
+			email.setAuthentication(PropKit.get("mail.user"), PropKit.get("mail.password"));
+			email.setFrom(PropKit.get("mail.user"),PropKit.get("mail.name"));
 			email.setSubject(subject);
 			email.addTo(recipients);
 			email.setHtmlMsg(body);
@@ -52,10 +54,6 @@ public class MailSender {
 		} catch (EmailException e) {
 			throw new RuntimeException("Unabled to send email", e);
 		}
-	}
-	public static void main(String[] args) {
-		MailSender.sendAsync("Test", "<html><body><h1>hello</h1></body></html>", "fancyzhaoyue@163.com");
-		MailSender.send("Test", "<html><body><h1>hello</h1></body></html>", "fancyzhaoyue@163.com");
 	}
 
 }

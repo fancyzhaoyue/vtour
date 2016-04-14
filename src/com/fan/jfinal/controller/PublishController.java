@@ -11,14 +11,15 @@ import com.fan.jfinal.interceptor.LoginInterceptor;
 import com.fan.jfinal.model.Pano;
 import com.fan.jfinal.model.User;
 import com.jfinal.aop.Before;
+import com.jfinal.ext.interceptor.NoUrlPara;
 import com.jfinal.upload.UploadFile;
+
 @Before(LoginInterceptor.class)
 public class PublishController extends BaseController {
 	
 	
-	public void index() {
-		render("publish.html");
-	}
+	@Before(NoUrlPara.class)
+	public void index() {}
 	
 	public void create() {
 		
@@ -51,11 +52,11 @@ public class PublishController extends BaseController {
 		pano.set("thumb",    "/upload/"+ uid + "/" + pano.get("id") + "/imgs/thumb.jpg");
 		pano.update();
 		
-		redirect("/publish/add");
+		redirect("/publish/success");
 		
 	}
 	
-	public void add() {
+	public void success() {
 		render("publishSuccess.html");
 	}
 	

@@ -24,6 +24,12 @@ public class TourController extends BaseController {
 		renderMsg();
 	}
 	
+	public void getVtByUid() {
+		Page<Record> panoPage = Db.paginate(getParaToInt(), 12, "select * ","from pano where uid= ?",getPara("uid"));
+		setAttr("data", panoPage);
+		renderMsg();
+	}
+	
 	public void getVtRank(){
 		
 		List<Pano> panoList = Pano.dao.find("select * from pano limit ?", getParaToInt());

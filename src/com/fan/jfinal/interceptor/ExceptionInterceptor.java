@@ -21,7 +21,7 @@ public class ExceptionInterceptor implements Interceptor {
 				controller.renderMsg(1, message);
 			}else{
 				controller.setAttr("message", message);
-				controller.render("/page/error/failure.html");
+				controller.render("/page/error/errorPage.html");
 			}
 		}finally{
 			
@@ -30,7 +30,7 @@ public class ExceptionInterceptor implements Interceptor {
 	}
 	private static String formatException(Exception e){
 		String message = null;
-		if(e instanceof BaseBussException || e instanceof RuntimeException){
+		if(e instanceof BaseBussException){
 			message = e.getMessage();
 			if(StrKit.isBlank(message)){
 				message = e.toString();
